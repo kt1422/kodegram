@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faCompass, faHeart, faMoon, faSun, faSearch, faPlusSquare, faUserCircle, faMessage } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faCompass, faHeart, faMoon, faSun, faSearch, faPlusSquare, faUserCircle, faMessage, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import "./sideNav.css";
+import ModalSearch from "../ModalSearch";
+import ModalLogout from "../ModalLogout";
 
-const SideNav = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+const SideNav = (props) => {
+    
     const [searchValue, setSearchValue] = useState("");
-
+    // const [isDarkMode, setIsDarkMode] = useState(false);
+    const isDarkMode = props.isDarkMode;
     const handleThemeToggle = () => {
-        setIsDarkMode(!isDarkMode);
+        props.setIsDarkMode(!isDarkMode);
     };
 
     const handleSearchChange = (event) => {
@@ -17,77 +19,97 @@ const SideNav = () => {
     };
 
     return (
-        <div className={`sidenav ${isDarkMode ? "dark" : ""}`}>
-            <div className="sidenav-header">
-            <button id="test" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalComplete" hidden></button>
-            <img className="logo" src="https://1000logos.net/wp-content/uploads/2017/02/Instagram-Logo.png" alt="Instagram" />
-                <h2 className="sidenav-title">Facetagram</h2>
-            </div>
-            <nav>
-                <ul className="nav-list">
-                <li className="nav-item">
-                <Link to={"/"} className={`nav-link light ${isDarkMode ? "dark" : ""} a`}>
-                    <FontAwesomeIcon icon={faHome} className="nav-icon" /><span className="nav-label">Home</span>
+        <div>
+            <ModalLogout></ModalLogout>
+            <ModalSearch likeModal={props.likeModal} setLikeModal={props.setLikeModal}></ModalSearch>
+            <div className={`sidenav border-end ${isDarkMode ? "dark" : ""}`}>
+                <div className="sidenav-header">
+                    <Link to={"/home"} className="d-flex nav-link">
+                        <img className="logo my-1" src="https://1000logos.net/wp-content/uploads/2017/02/Instagram-Logo.png" alt="Instagram" />
+                        <span className="kode fs-4 fw-semibold">Kodegram</span>
                     </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to={"#"} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
-                    <FontAwesomeIcon icon={faSearch} className="nav-icon" />
-                    <span className="nav-label">Search</span>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to={"/"} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
-                    <FontAwesomeIcon icon={faCompass} className="nav-icon" />
-                    <span className="nav-label">Explore</span>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to={"/"} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
-                    <FontAwesomeIcon icon={faMessage} className="nav-icon" />
-                    <span className="nav-label">Messages</span>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to={"/"} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
-                    <FontAwesomeIcon icon={faHeart} className="nav-icon" />
-                    <span className="nav-label">Notifications</span>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link onClick={()=>document.getElementById('test').click()} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
-                    <FontAwesomeIcon icon={faPlusSquare} className="nav-icon" />
-                    <span className="nav-label">Create</span>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to={"/"} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
-                    <FontAwesomeIcon icon={faUserCircle} className="nav-icon" />
-                    <span className="nav-label">Profile</span>
-                    </Link>
-                </li>
-                </ul>
-                <div className="search-box">
-                <FontAwesomeIcon icon={faSearch} className="search-icon" />
-                <input
-                    type="text"
-                    placeholder="Search"
-                    className={`search-input ${isDarkMode ? "dark" : ""}`}
-                    value={searchValue}
-                    onChange={handleSearchChange}
-                />
                 </div>
-            </nav>
-            <div className="sidenav-footer">
-                <button className="theme-toggle" onClick={handleThemeToggle}>
-                <FontAwesomeIcon
-                    icon={isDarkMode ? faSun : faMoon}
-                    className="theme-icon"
-                />
-                <span className="theme-label">
-                    {isDarkMode ? "Light Mode" : "Dark Mode"}
-                </span>
-                </button>
+                <nav>
+                    <ul className="nav-list ps-0">
+                        <li className="nav-item">
+                        <Link to={"/home"} className={`nav-link light a ${isDarkMode ? "dark" : ""}`}>
+                            <FontAwesomeIcon icon={faHome} className="nav-icon" /><span className="nav-label">Home</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
+                            <FontAwesomeIcon icon={faCompass} className="nav-icon" />
+                            <span className="nav-label">Explore</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={"/chat/login"} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
+                            <FontAwesomeIcon icon={faMessage} className="nav-icon" />
+                            <span className="nav-label">Messages</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
+                            <FontAwesomeIcon icon={faHeart} className="nav-icon" />
+                            <span className="nav-label">Notifications</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link data-bs-toggle="modal" data-bs-target="#createPostModal" className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
+                            <FontAwesomeIcon icon={faPlusSquare} className="nav-icon" />
+                            <span className="nav-label">Create</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={`/user/profile?id=${props.user_id}`} className={`nav-link light ${isDarkMode ? "dark" : ""}`} reloadDocument>
+                            <FontAwesomeIcon icon={faUserCircle} className="nav-icon" />
+                            <span className="nav-label">Profile</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={"/"} className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
+                            <FontAwesomeIcon icon={faQuestionCircle} className="nav-icon" />
+                            <span className="nav-label">About Us</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link data-bs-toggle="modal" data-bs-target="#modalSearch" className={`nav-link light ${isDarkMode ? "dark" : ""}`}>
+                            <FontAwesomeIcon icon={faSearch} className="nav-icon" />
+                            <span className="nav-label">Search</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className={`nav-link light ${isDarkMode ? "dark" : ""}`} onClick={handleThemeToggle}>
+                            <FontAwesomeIcon
+                            icon={isDarkMode ? faSun : faMoon}
+                            className={`nav-icon ${isDarkMode ? "dark" : ""}`}
+                            />
+                            <span className={`nav-label ${isDarkMode ? "dark" : ""}`}>
+                                {isDarkMode ? "Light Mode" : "Dark Mode"}
+                            </span>
+                            </Link>
+                        </li>
+                        <li className="nav-item dropdown dropup">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img className="rounded-circle border border-dark me-2" src={props.pic} alt="" style={{width: 25, height: 25}}/>
+                                <span className={`nav-label ${isDarkMode ? "dark" : ""}`}>
+                                {props.username}
+                                </span>
+                            </a>
+                            <ul className={`dropdown-menu ${isDarkMode ? "dark" : ""}`}>
+                                <li>
+                                    <Link to={`/user/profile?id=${props.user_id}`} className={`dropdown-item ${isDarkMode ? "dark" : ""}`} reloadDocument>Profile</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/user/settings"} className={`dropdown-item ${isDarkMode ? "dark" : ""}`}>Settings</Link>
+                                </li>
+                                <li>
+                                    <Link className={`dropdown-item ${isDarkMode ? "dark" : ""}`} data-bs-toggle="modal" data-bs-target="#exampleModal4">Log out</Link>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     )

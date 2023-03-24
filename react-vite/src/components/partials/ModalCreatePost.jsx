@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -82,11 +82,9 @@ const ModalCreatePost = (props) => {
             uploadBytes(imageRef, urls[i]).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
                     setUploads(oldArray => [...oldArray, url]);
-                    // setTriggerEffect(triggerEffect+1);
                 });
             });
         }
-        // setTriggerEffect(triggerEffect+1);
     }
 
     return (

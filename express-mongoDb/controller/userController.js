@@ -5,6 +5,34 @@ const validation = require('../utils/validation');
 const bcrypt = require('../utils/bcrypt');
 const jwt = require('jsonwebtoken');
 
+const user_get = async (req, res) => {
+	try {
+        const userId = req.getUser.id;
+        const rawUsers = await User.find();
+        const allUsers = [];
+        for(let user of rawUsers) {
+            let btnFollow = "Disabled";
+            if(userId!==user._id.toString()){
+                const followRecord = await Follow.findOne({user_followed: user._id, user_follower: userId});
+                btnFollow = (followRecord)?"Following":"Follow";
+            }
+            const obj = {
+                user_id: user._id,
+                fname: user.fname,
+                username: user.username,
+                pic: user.pic || "../../src/assets/img/user-icon.png",
+                btnFollow: btnFollow
+            }
+            allUsers.push(obj)
+        }
+
+        res.send({status: "success", message: "Got all users", allUsers});
+	} catch (error) {
+		res.status(400).send(error);
+		console.log(error);
+	}
+}
+
 const user_add = async (req, res) => {
 	try {
         const { error } =  validation.userValidation.validate(req.body);
@@ -31,6 +59,24 @@ const user_add = async (req, res) => {
         res.send({
             status: "success",
             message: "You have successfuly created an account!"
+        });
+	} catch (error) {
+		res.status(400).send(error);
+		console.log(error);
+	}
+}
+
+const user_update = async (req, res) => {
+	try {
+        const userId = req.getUser.id;
+        const editUser = await User.findByIdAndUpdate(userId, {
+            pic: req.body.pic,
+            fname: req.body.fname,
+            bio: req.body.bio,
+        });
+        res.send({
+            status: "success",
+            message: "You have successfuly update your account!"
         });
 	} catch (error) {
 		res.status(400).send(error);
@@ -70,7 +116,9 @@ const user_home = async (req, res) => {
             const logUser = await User.findOne({_id: userId});
             const user = {
                 user_id: userId,
+                fname: logUser.fname,
                 username: logUser.username,
+                bio: logUser.bio,
                 pic: logUser.pic || "../../src/assets/img/user-icon.png"
             }
             res.send({status: "success", message: "Hello user", user});
@@ -222,7 +270,9 @@ const user_followings = async (req, res) => {
 }
 
 module.exports = {
+    user_get,
     user_add,
+    user_update,
     user_login,
     user_home,
     user_profile,

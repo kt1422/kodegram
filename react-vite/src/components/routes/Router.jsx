@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Profile from '../pages/Profile';
-import Test1 from '../pages/Test1';
-import Test2 from '../pages/Test2';
-import Test3 from '../pages/Test3';
+import Setting from '../pages/Setting';
 import Chatlogin from '../pages/Chatlogin';
 import Chatregister from '../pages/Chatregister';
 import Chathome from '../pages/Chathome';
@@ -23,21 +21,20 @@ export default function RouterConvention() {
         }
         return children;
     }
+    const [isDarkMode, setIsDarkMode] = useState(false);
     return (
         <Routes>
-            <Route index element={<Navigate to='/home' />} />
-            <Route path='/home' element={<Home/>} />
-            <Route path='/user/login' element={<Login/>} />
-            <Route path='/user/register' element={<Register/>} />
-            <Route path='/user/profile' element={<Profile/>} />
-            <Route path='/test1' element={<Test1/>} />
-            <Route path='/test2' element={<Test2/>} />
-            <Route path='/test3' element={<Test3/>} />
-            <Route path='/chat/login' element={<Chatlogin/>} />
-            <Route path='/chat/register' element={<Chatregister/>} />
+            <Route index element={<Navigate to='/home' isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
+            <Route path='/home' element={<Home isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
+            <Route path='/user/login' element={<Login isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
+            <Route path='/user/register' element={<Register isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
+            <Route path='/user/profile' element={<Profile isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
+            <Route path='/user/settings' element={<Setting isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
+            <Route path='/chat/login' element={<Chatlogin isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
+            <Route path='/chat/register' element={<Chatregister isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
             <Route path='/chat/home' element={
                 <ProtectedRoute>
-                    <Chathome/>
+                    <Chathome isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
                 </ProtectedRoute>} />
         </Routes>   
     )

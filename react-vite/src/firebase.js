@@ -5,12 +5,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAASZT1RP9Q4p1UOGB1JDhHOfQTN4XO00k",
-  authDomain: "facetagram-capstone.firebaseapp.com",
-  projectId: "facetagram-capstone",
-  storageBucket: "facetagram-capstone.appspot.com",
-  messagingSenderId: "1062067154648",
-  appId: "1:1062067154648:web:6c426f486ad9c5bffab1ad"
+    apiKey: "AIzaSyDO9oQr6TgMzIxsB4ucf3AcY_dfBpqTnwM",
+    authDomain: "kodegram-dde03.firebaseapp.com",
+    projectId: "kodegram-dde03",
+    storageBucket: "kodegram-dde03.appspot.com",
+    messagingSenderId: "156624202219",
+    appId: "1:156624202219:web:d3147c8677f8c848be91ae"
 };
 
 // Initialize Firebase

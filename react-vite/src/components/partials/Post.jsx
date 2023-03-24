@@ -9,6 +9,7 @@ import ModalLike from './ModalLike';
 import ModalEditPost from './ModalEditPost';
 
 const Post = (props) => {
+
     let redirect = useNavigate();
     const cookies = new Cookies();
     const token = cookies.get('userToken');
@@ -148,19 +149,19 @@ const Post = (props) => {
 
     return (
         <div id={`post${props.post_id}`}>
-            <div className="card border-0 pb-3 mb-3 border-bottom" style={{width: 500}}>
+            <div className={`media card border-0 pb-3 mb-3 border-bottom ${props.isDarkMode ? "dark" : ""}`}>
                 <div className='d-flex justify-content-between mb-2 ps-1'>
                     <div className='d-flex'>
                         <Link to={`/user/profile?id=${props.user_id}`} className="nav-link me-2 fw-semibold d-flex">
                             <img className="rounded-circle border me-2" src={props.pic} alt="" style={{width: 40, height: 40}}/>
                             <p className='name-link pt-2 m-0'>{props.username}</p>
                         </Link>
-                        <p className='d-flex h-100 m-0 pt-2 text-muted'> • {props.date}</p>
+                        <p className={`d-flex h-100 m-0 pt-2 fw-light ${props.isDarkMode ? "dark" : ""}`}> • {props.date}</p>
                     </div>
                     <div className='pt-2'>
                         <div className="dropdown">
                             <button className='border-0 bg-transparent' data-bs-toggle="dropdown">
-                                <i className="bi bi-three-dots"></i>
+                                <i className={`bi bi-three-dots ${props.isDarkMode ? "dark" : ""}`}></i>
                             </button>
                             {
                             (props.owner)?
@@ -204,15 +205,15 @@ const Post = (props) => {
                         {
                         (heart=="Liked")?
                         <button className='name-link border-0 bg-transparent fs-4 p-0' onClick={()=>likeHandle(props.post_id, false)} >
-                            <FontAwesomeIcon icon="fa-solid fa-heart" className='text-danger'/>
+                            <FontAwesomeIcon icon="fa-solid fa-heart" className={`${props.isDarkMode ? "dark" : ""}`}/>
                         </button>
                         :
                         <button className='test-link border-0 bg-transparent fs-4 p-0' onClick={()=>likeHandle(props.post_id, true)} >
-                            <FontAwesomeIcon icon="fa-regular fa-heart" />
+                            <FontAwesomeIcon icon="fa-regular fa-heart" className={`${props.isDarkMode ? "dark" : ""}`}/>
                         </button>
                         }
-                        <button className='name-link border-0 bg-transparent fs-4 p-0' data-bs-toggle="modal" data-bs-target={`#viewPostModal${props.post_id}`}><i className="fa-regular fa-comment"></i></button>
-                        <button className='name-link border-0 bg-transparent fs-4 p-0'><i className="fa-regular fa-paper-plane"></i></button>
+                        <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.isDarkMode ? "dark" : ""}`} data-bs-toggle="modal" data-bs-target={`#viewPostModal${props.post_id}`}><i className="fa-regular fa-comment"></i></button>
+                        <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.isDarkMode ? "dark" : ""}`}><i className="fa-regular fa-paper-plane"></i></button>
                     </div>
                     <div>
                         <p className='fs-4 name-link mb-1'><i className="fa-regular fa-bookmark"></i></p>
@@ -233,7 +234,7 @@ const Post = (props) => {
                 }
                 {
                 (numComments>0)?
-                <p className='text-muted mb-1' data-bs-toggle="modal" data-bs-target={`#viewPostModal${props.post_id}`} style={{cursor: "pointer"}}>View all {numComments} {wordComment}</p>
+                <p className={`fw-light mb-1 ${props.isDarkMode ? "dark" : ""}`} data-bs-toggle="modal" data-bs-target={`#viewPostModal${props.post_id}`} style={{cursor: "pointer"}}>View all {numComments} {wordComment}</p>
                 :
                 <div></div>
                 }
@@ -243,7 +244,7 @@ const Post = (props) => {
                 ))
                 }
                 <div className='d-flex align-items-start'>
-                    <textarea className='border-0 comment-box col' rows={1} id='comment' name='post' placeholder='Add a comment...' style={{resize: "none"}} onChange={(e)=>handleKeyDown(e)} value={comment}></textarea>
+                    <textarea className={`border-0 comment-box col ${props.isDarkMode ? "dark" : ""}`} rows={1} id='comment' name='post' placeholder='Add a comment...' style={{resize: "none"}} onChange={(e)=>handleKeyDown(e)} value={comment}></textarea>
                     {
                     (comment!=="")?
                     <button className='border-0 bg-transparent text-primary-emphasis fw-semibold col-auto' onClick={()=>commentHandle()}>
@@ -317,7 +318,7 @@ const Post = (props) => {
                                     :
                                     <div></div>
                                     }
-                                    {(numComments<0) && (
+                                    {(numComments>0) && (
                                         <Comment key={props.post_id} post_id={props.post_id} numComments={numComments}></Comment>
                                     )}
                                 </div>

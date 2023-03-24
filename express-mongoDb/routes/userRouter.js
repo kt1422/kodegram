@@ -2,10 +2,13 @@ const userRouter = require('express').Router();
 const userController = require('../controller/userController');
 const jwtAuth = require('../utils/jwtAuth');
 
-// userRouter.get('/profile/:id', userController.user_profile);
+userRouter.post('/get', jwtAuth.verify, userController.user_get);
 
 //register user
 userRouter.post('/add', userController.user_add);
+
+//update user
+userRouter.post('/update', jwtAuth.verify, userController.user_update);
 
 //login user
 userRouter.post('/login', userController.user_login);
