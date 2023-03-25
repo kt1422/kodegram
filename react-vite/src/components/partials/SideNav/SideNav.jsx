@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faCompass, faHeart, faMoon, faSun, faSearch, faPlusSquare, faUserCircle, faMessage, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -11,6 +12,8 @@ const SideNav = (props) => {
     // const [isDarkMode, setIsDarkMode] = useState(false);
     const isDarkMode = props.isDarkMode;
     const handleThemeToggle = () => {
+        const cookies = new Cookies();
+        cookies.set('theme', !isDarkMode, { path: '/' });
         props.setIsDarkMode(!isDarkMode);
     };
 
@@ -96,7 +99,7 @@ const SideNav = (props) => {
                                 {props.username}
                                 </span>
                             </a>
-                            <ul className={`dropdown-menu ${isDarkMode ? "dark" : ""}`}>
+                            <ul className={`dropdown-menu ${isDarkMode ? "dark" : ""}`} style={{position: "absolute"}}>
                                 <li>
                                     <Link to={`/user/profile?id=${props.user_id}`} className={`dropdown-item ${isDarkMode ? "dark" : ""}`} reloadDocument>Profile</Link>
                                 </li>

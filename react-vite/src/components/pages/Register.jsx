@@ -3,6 +3,7 @@ import { TabTitle } from '../../utilities/title';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { createNewUser } from '../../service/api';
+import logo from '../../assets/img/logo.png';
 
 export default function Register() {
     TabTitle('Register');
@@ -47,7 +48,8 @@ export default function Register() {
             <div></div>
             }
             </div>
-            <div className="container-fluid d-flex align-items-center justify-content-center">
+            <div className="container-fluid d-flex align-items-center justify-content-center gap-5">
+                <img src={logo} alt="" style={{height: 400}} />
                 <div className="bg-dark rounded rounded-4 d-flex justify-content-center flex-column px-4 text-light" style={{height: 600, width: 500}}>
                     <h1 className="align-self-center mb-3">Register</h1>
                     <form>

@@ -111,10 +111,36 @@
     .media3 {
         margin-left: 100px;
     }
+    .media4 {
+        margin-left: 200px;
+    }
 }
 
 @media screen and (min-width: 509px) {
     .media2 {
         margin-left: 100px;
+    }
+}
+
+@media screen and (min-width: 1060px) {
+    .media4 {
+        margin-left: 250px;
+    }
+    .setbtn {
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 779px) {
+    .media4 {
+        margin-left: 100px;
+    }
+    /* .setbtn {
+        width: 200px;
+    } */
+}
+@media screen and (max-width: 480px) {
+    .media4 {
+        margin-left: 0px;
     }
 }

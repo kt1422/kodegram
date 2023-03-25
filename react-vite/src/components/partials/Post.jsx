@@ -148,7 +148,7 @@ const Post = (props) => {
     }, []);
 
     return (
-        <div id={`post${props.post_id}`}>
+        <div id={`post${props.post_id}`} style={{color: "black"}}>
             <div className={`media card border-0 pb-3 mb-3 border-bottom ${props.isDarkMode ? "dark" : ""}`}>
                 <div className='d-flex justify-content-between mb-2 ps-1'>
                     <div className='d-flex'>
@@ -258,7 +258,7 @@ const Post = (props) => {
             <div className="modal fade" id={`viewPostModal${props.post_id}`} tabIndex="-1" aria-hidden="true">
                 <div className="modal-dialog modal-xl">
                     <div className="modal-content d-flex flex-row" style = {{height:"90vh"}}>
-                        <div id={`viewcarousel${props.post_id}`} className="carousel slide w-50 h-100">
+                        <div id={`viewcarousel${props.post_id}`} className="carousel slide w-50 h-100 d-none d-lg-flex">
                             <div className="carousel-inner h-100 w-100 bg-black">
                             {
                             viewImage.map((data)=>(
@@ -286,7 +286,7 @@ const Post = (props) => {
                             <div></div>
                             }
                         </div>
-                        <div className='w-50 h-100 d-flex flex-column border-start'>
+                        <div className='col-12 col-lg-6 h-100 d-flex flex-column border-start'>
                             <div className="modal-header">
                                 <Link to={`/user/profile?id=${props.user_id}`} className="nav-link fw-semibold d-flex">
                                     <img className="rounded-circle border me-3" src={props.pic} alt="" style={{width: 40, height: 40}}/>

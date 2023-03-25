@@ -123,7 +123,7 @@ const ModalViewPost = (props) => {
 
     return (
         <div>
-            <div className="modal fade" id={`viewPostModal${props.post_id}`} tabIndex="-1" aria-hidden="true">
+            <div className="modal fade" id={`viewPostModal${props.post_id}`} tabIndex="-1" aria-hidden="true"style={{color: "black"}}>
                 <div className="modal-dialog modal-xl">
                     <div className="modal-content d-flex flex-row" style = {{height:"90vh"}}>
                         <div id={`viewcarousel${props.post_id}`} className="carousel slide w-50 h-100">

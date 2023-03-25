@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from '../../service/api';
 import Cookies from 'universal-cookie';
+import logo from '../../assets/img/logo.png';
 
 export default function Login() {
     TabTitle('Login');
@@ -29,6 +30,7 @@ export default function Login() {
         if(response.data.status == "success") {
             const cookies = new Cookies();
             cookies.set('userToken', response.data.token, { path: '/' });
+            cookies.set('theme', false, { path: '/' });
             redirect('/home');
         } else {
             setMsg(response.data);
@@ -47,8 +49,9 @@ export default function Login() {
             <div></div>
             }
             </div>
-            <div className="container-fluid d-flex align-items-center justify-content-center">
-                <div className="bg-dark rounded rounded-4 mb-5 d-flex justify-content-center flex-column px-4 text-light" style={{height: 400, width: 500}}>
+            <div className="container-fluid d-flex align-items-center justify-content-center gap-5">
+                <img src={logo} alt="" style={{height: 400}} />
+                <div className="bg-dark rounded rounded-4 d-flex justify-content-center flex-column px-4 text-light" style={{height: 400, width: 500}}>
                     <h1 className="align-self-center mb-3">Login</h1>
                     <form>
                         <div className="mb-4">

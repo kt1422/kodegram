@@ -56,7 +56,8 @@ export default function Setting(props) {
     }
 
     const handleUpdate = async () =>{
-        const response = await updateUser({token: token, pic: upload, fname: userfname, bio: userbio});
+        const picture = (upload)?upload:pic;
+        const response = await updateUser({token: token, pic: picture, fname: userfname, bio: userbio});
         redirect(0);
     }
 
@@ -74,8 +75,8 @@ export default function Setting(props) {
                 <SideNav user_id={user_id} username={username} pic={pic} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} likeModal={likeModal} setLikeModal={setLikeModal}></SideNav>
             </div>
             <div className={`container-fluid ${isDarkMode ? "dark" : ""}`} style={{minHeight: "100vh"}}>
-                <div className="d-flex align-items-start" style={{marginLeft: 250, paddingTop: 50}}>
-                    <div className="nav flex-column gap-3 nav-pills me-3 col-4" id="v-pills-tab" role="tablist" aria-orientation="vertical" style={{width: 250}}>
+                <div className="media4 d-flex flex-column flex-sm-row align-items-start" style={{paddingTop: 50, paddingBottom: 75}}>
+                    <div className="setbtn nav flex-row flex-sm-column gap-3 nav-pills me-3 col col-sm-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <button className="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Profile</button>
                         <button className="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</button>
                         <button className="nav-link" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">Email notification</button>
@@ -89,9 +90,9 @@ export default function Setting(props) {
 
                         <button className="nav-link" id="v-pills-superVision-tab" data-bs-toggle="pill" data-bs-target="#v-pills-superVision" type="button" role="tab" aria-controls="v-pills-superVision" aria-selected="false">Supervision</button>
 
-                        <button className="nav-link" id="v-pills-YDAM-tab" data-bs-toggle="pill" data-bs-target="#v-pills-YDAM" type="button" role="tab" aria-controls="v-pills-YDAM" aria-selected="false">Your data and media</button>
+                        <button className="nav-link mb-2" id="v-pills-YDAM-tab" data-bs-toggle="pill" data-bs-target="#v-pills-YDAM" type="button" role="tab" aria-controls="v-pills-YDAM" aria-selected="false">Your data and media</button>
                     </div>
-                    <div className="tab-content border rounded p-4 col-8" id="v-pills-tabContent">
+                    <div className="tab-content border rounded p-4 col col-sm-8" id="v-pills-tabContent">
                         <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabIndex="0">
                             <h3 className='mb-3'>Edit profile</h3>
                             <main>
@@ -102,7 +103,7 @@ export default function Setting(props) {
                                                 <img src={userpic} className="img img-thumbnail rounded-circle " alt="Profile Picture" style={{width: 150, height: 150}} />
                                             </div>
                                             <div className="col">
-                                                <p className='fs-5'>{username}</p>
+                                                <p className='fs-5 mt-2'>{username}</p>
                                                 <input id='chooseFile' type='file' accept="image/png, image/jpeg, image/gif" onChange={(e) => handlePic(e.target.files)}/>
                                             </div>
                                         </div>

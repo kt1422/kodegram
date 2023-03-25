@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -7,6 +7,7 @@ import Setting from '../pages/Setting';
 import Chatlogin from '../pages/Chatlogin';
 import Chatregister from '../pages/Chatregister';
 import Chathome from '../pages/Chathome';
+import Cookies from 'universal-cookie';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
@@ -21,7 +22,23 @@ export default function RouterConvention() {
         }
         return children;
     }
+    const cookies = new Cookies();
+    const theme = cookies.get('theme');
     const [isDarkMode, setIsDarkMode] = useState(false);
+    useEffect( () =>{
+        try {
+            if(theme=="false"){
+                setIsDarkMode(false);
+            } else if(theme=="true") {
+                setIsDarkMode(true);
+            }
+        } catch (error) {
+            //nothing
+        }
+    }, []);
+    
+    // console.log(theme);
+
     return (
         <Routes>
             <Route index element={<Navigate to='/home' isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>} />
