@@ -1,5 +1,11 @@
 # Kodegram
 
+
+The website can be accessed through two different URLs:
+
+https://kodegram.devph.space/
+https://kodegram-frontend.vercel.app/
+
 This is our final Capstone Project for our Codecamp in KodeGo and we named the project Kodegram
 
 Kodegram
